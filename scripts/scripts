@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CUR_DIR=$(dirname $(readlink -f "$0"))
+code $CUR_DIR

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# == 0 ]]; then
+  echo "Usage: create-script <file>"
+  exit 1
+fi
+
+file=$1
+if [[ ! -e $file ]]; then
+  echo $1
+  template_file="$(dirname $(readlink -f "$0"))/lib/template.sh"
+  cp $template_file $file
+fi
+
+chmod +x $file
+# git update-index --chmod=+x $file
+editor $file

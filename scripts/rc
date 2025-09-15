@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rc_files=("~/.zshrc" "~/.bashrc")
+
+for rc_file in "${rc_files[@]}"; do
+  if [ -e $rc_file ]; then
+    editor $rc_file
+    break
+  fi
+done
