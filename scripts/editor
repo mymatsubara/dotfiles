@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 editors=(code nvim vim vi nano)
 
 for editor in "${editors[@]}"; do
