@@ -7,4 +7,4 @@ export DOTFILES_DIR=$(dirname $(readlink -f "$0"))
 ualias gcp 2&>/dev/null
 
 # Set up PATH
-export PATH="$PATH:$DOTFILES_DIR/scripts"
+export PATH="$DOTFILES_DIR/scripts:$PATH"
