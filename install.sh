@@ -1,5 +1,13 @@
 #!/bin/bash
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -n "$BASH_SOURCE" ]; then
+  SCRIPT_PATH="${BASH_SOURCE[0]}"
+elif [ -n "$ZSH_VERSION" ]; then
+  SCRIPT_PATH="${(%):-%N}"
+else
+  SCRIPT_PATH="$0"
+fi
+DOTFILES_DIR="$(realpath "$(dirname "${SCRIPT_PATH}")")"
+
 LOAD_BASHRC_DM="source $DOTFILES_DIR/.bashrc"
 
 touch ~/.bashrc
