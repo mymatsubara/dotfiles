@@ -65,13 +65,13 @@ OpenWindow(r, ahk_exe_arg := "") {
 }
 
 ; Win+E: Explorer
-#E:: {
-    if WinExist("ahk_class CabinetWClass") {
-        WinActivate() ;
-    } else {
-        Run("explorer.exe")
-    }
-}
+; #E:: {
+;     if WinExist("ahk_class CabinetWClass") {
+;         WinActivate() ;
+;     } else {
+;         Run("explorer.exe")
+;     }
+; }
 
 ; Win+W: Close window
 #W:: WinClose("A")
