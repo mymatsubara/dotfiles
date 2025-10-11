@@ -12,7 +12,7 @@ OpenWindow(r, ahk_exe_arg := "") {
         WinActivate() ;
     } else {
         Run(r)
-        Sleep(500)
+        Sleep(600)
         if WinExist(exec) {
             WinActivate() ;
         }
@@ -51,12 +51,17 @@ OpenWindow(r, ahk_exe_arg := "") {
 
 ; Win+O: Obsidian
 #O:: {
-    OpenWindow("C:\Users\Murilo\AppData\Local\Obsidian\Obsidian.exe")
+    OpenWindow("C:\Users\Murilo\AppData\Local\Programs\Obsidian\Obsidian.exe")
 }
 
-; Win+L: DBeaver
-#K:: {
+; Win+I: DBeaver
+#I:: {
     OpenWindow("C:\Users\Murilo\AppData\Local\DBeaver\dbeaver.exe")
+}
+
+; Win+K: Docker Desktop
+#K:: {
+    OpenWindow("C:\Program Files\Docker\Docker\Docker Desktop.exe")
 }
 
 ; Win+E: Explorer
