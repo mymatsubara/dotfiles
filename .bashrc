@@ -14,3 +14,5 @@ unalias gcp 2&>/dev/null
 
 # Set up PATH
 export PATH="$DOTFILES_DIR/scripts:$PATH"
+
+bind -f $DOTFILES_DIR/.inputrc
