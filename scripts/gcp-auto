@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
+COMMIT_MESSAGE=$(git diff HEAD | claude -p "Output ONLY a single-line 
+conventional commit message for this diff. No preamble, no explanation." --effort medium)
+git add -A && git commit -m "$COMMIT_MESSAGE" && git push
