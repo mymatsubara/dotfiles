@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-COMMIT_MESSAGE=$(git diff HEAD | claude -p "Output ONLY a single-line 
-conventional commit message for this diff. No preamble, no explanation, only the commit message." --effort high)
+CUR_DIR=$(dirname "$(readlink -f "$0")")
+COMMIT_MESSAGE=$("$CUR_DIR/gen-commit-msg")
 git add -A && git commit -m "$COMMIT_MESSAGE" && git push
