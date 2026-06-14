@@ -1,12 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-RAW=$(git diff HEAD | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, no code fences, no backticks, no quotes - only the commit message itself." --effort high)
+RAW=$(git diff HEAD | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, only the commit message." --model "claude-opus-4-7")
 
-COMMIT_MESSAGE=$(printf '%s\n' "$RAW" \
-  | tr -d '`' \
-  | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' \
-  | grep -Em1 '^(feat|fix|chore|docs|style|refactor|perf|test|build|ci|revert)(\([^)]+\))?!?: .+' || true)
+COMMIT_MESSAGE=$(printf '%s\n' "$RAW" | grep -oEm1 '\w+([(][^)]+[)])?!?: [^`]+' || true)
 
 if [ -z "$COMMIT_MESSAGE" ]; then
   echo "Error: could not extract a conventional commit message from model output:" >&2
