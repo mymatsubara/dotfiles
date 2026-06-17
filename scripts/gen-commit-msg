@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-RAW=$(git diff HEAD | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, only the commit message." --model "claude-opus-4-7")
+RAW=$(git diff HEAD | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, only the commit message." --model "claude-opus-4-7" --effort "medium")
 
 COMMIT_MESSAGE=$(printf '%s\n' "$RAW" | grep -oEm1 '\w+([(][^)]+[)])?!?: [^`]+' || true)
 
