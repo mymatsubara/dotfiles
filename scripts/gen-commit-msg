@@ -1,7 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
-RAW=$(git diff HEAD | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, only the commit message." --model "claude-opus-4-7" --effort "medium")
+MAX_LINE_WIDTH=250
+
+truncated_diff=$(git diff HEAD | awk -v max="$MAX_LINE_WIDTH" '{
+  if (length($0) > max) {
+    print substr($0, 1, max) " ... [line truncated: " length($0) " chars total]"
+  } else {
+    print
+  }
+}')
+
+RAW=$(printf '%s\n' "$truncated_diff" | claude -p "Output ONLY a single-line conventional commit message for this diff. No preamble, no explanation, only the commit message." --model "claude-opus-4-7" --effort "medium")
 
 COMMIT_MESSAGE=$(printf '%s\n' "$RAW" | grep -oEm1 '\w+([(][^)]+[)])?!?: [^`]+' || true)
 
